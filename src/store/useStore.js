@@ -1,22 +1,23 @@
 import { create } from 'zustand';
-import { datasets } from '../data/datasets';
+import lab1Default from '../data/variants/1/lab1.json';
+import labsDefault from '../data/variants/1/labs2_3.json';
 import { runHierarchicalClustering } from '../utils/clustering';
 
 export const useStore = create((set, get) => {
   // Run initial clustering for Lab 2 and 3 so steps are cached
-  const initialLab2 = runHierarchicalClustering(datasets.labs2_3.objects, 'single');
-  const initialLab3 = runHierarchicalClustering(datasets.labs2_3.objects, 'complete');
+  const initialLab2 = runHierarchicalClustering(labsDefault.objects, 'single');
+  const initialLab3 = runHierarchicalClustering(labsDefault.objects, 'complete');
 
   return {
     // === Lab 1 State ===
     lab1Data: {
       task1: {
-        objects: [...datasets.lab1.task1.objects],
+        objects: [...lab1Default.task1.objects],
         p: 2, // power distance parameters
         r: 1
       },
       task2: {
-        objects: [...datasets.lab1.task2.objects]
+        objects: [...lab1Default.task2.objects]
       }
     },
     
@@ -72,7 +73,7 @@ export const useStore = create((set, get) => {
 
     // === Lab 2 & 3 State ===
     labsData: {
-      objects: [...datasets.labs2_3.objects],
+      objects: [...labsDefault.objects],
       singleLinkage: {
         steps: initialLab2.steps,
         dendrogram: initialLab2.dendrogram,
