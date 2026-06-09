@@ -115,11 +115,11 @@ export const Exam = () => {
                 <line x1="230" y1="80" x2="255" y2="102" stroke="#bfbfbf" strokeWidth="1" />
 
                 {/* Side Arrows */}
-                <path d="M 20 115 L 20 20" fill="none" stroke="#52c41a" strokeWidth="2" markerEnd="url(#arrow-green)" />
-                <text x="15" y="65" fontSize="8" fill="#52c41a" fontWeight="bold" transform="rotate(-90 15 65)" textAnchor="middle">АГЛОМЕРАТИВНИЙ (Знизу вгору)</text>
+                <path d="M 15 110 L 15 25" fill="none" stroke="#52c41a" strokeWidth="2" markerEnd="url(#arrow-green)" />
+                <text x="22" y="68" fontSize="8" fill="#52c41a" fontWeight="bold">Агломеративний ↑</text>
 
-                <path d="M 285 20 L 285 115" fill="none" stroke="#ff4d4f" strokeWidth="2" markerEnd="url(#arrow-red)" />
-                <text x="290" y="65" fontSize="8" fill="#ff4d4f" fontWeight="bold" transform="rotate(90 290 65)" textAnchor="middle">ДИВІЗИМНИЙ (Зверху вниз)</text>
+                <path d="M 285 25 L 285 110" fill="none" stroke="#ff4d4f" strokeWidth="2" markerEnd="url(#arrow-red)" />
+                <text x="278" y="68" fontSize="8" fill="#ff4d4f" fontWeight="bold" textAnchor="end">↓ Дивізивний</text>
 
                 {/* Arrow markers definitions */}
                 <defs>
