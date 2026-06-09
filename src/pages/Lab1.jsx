@@ -1,13 +1,13 @@
 import React from 'react';
 import { useStore } from '../store/useStore';
 import { Table, Card, InputNumber, Row, Col, Typography, Divider, Space, Tag } from 'antd';
-import { calculateEuclideanDistance } from '../utils/clustering';
+import { calculateDistanceByMetric } from '../utils/clustering';
 import { CalculatorOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
 
 export const Lab1 = () => {
-  const { lab1Data, updateLab1Task1Object, updateLab1Task1Params, updateLab1Task2Object } = useStore();
+  const { currentVariant, lab1Data, updateLab1Task1Object, updateLab1Task1Params, updateLab1Task2Object } = useStore();
 
   const { objects: t1Objects, p, r } = lab1Data.task1;
   const { objects: t2Objects } = lab1Data.task2;
@@ -103,7 +103,7 @@ export const Lab1 = () => {
     for (let i = 0; i < t2Objects.length; i++) {
       const row = { id: t2Objects[i].id, key: t2Objects[i].id };
       for (let j = 0; j < t2Objects.length; j++) {
-        row[`d_${t2Objects[j].id}`] = calculateEuclideanDistance(t2Objects[i], t2Objects[j], ['x1', 'x2']);
+        row[`d_${t2Objects[j].id}`] = calculateDistanceByMetric(t2Objects[i], t2Objects[j], lab1Data.task2.metric, ['x1', 'x2']);
       }
       matrix.push(row);
     }
@@ -137,7 +137,7 @@ export const Lab1 = () => {
       <div style={{ marginBottom: 24 }}>
         <Title level={2}>Лабораторна робота №1</Title>
         <Paragraph style={{ color: '#8c8c8c' }}>
-          Тема: Обчислення мір близькості для числових даних. Варіант 1.
+          Тема: Обчислення мір близькості для числових даних. Варіант {currentVariant}.
         </Paragraph>
       </div>
 
@@ -145,7 +145,7 @@ export const Lab1 = () => {
         {/* Task 1 Panel */}
         <Col xs={24} lg={12}>
           <Card 
-            title={<><CalculatorOutlined /> Завдання 1: Розрахунок 5 мір близькості</>}
+            title={<><CalculatorOutlined /> Завдання 1: Розрахунок 5 мір близькості (Об'єкти {obj5.id} та {obj7.id})</>}
             hoverable
             style={{ height: '100%' }}
           >
@@ -195,8 +195,8 @@ export const Lab1 = () => {
               {/* Formula and Step Breakdown */}
               <div style={{ background: '#fafafa', padding: 16, borderRadius: 8 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>Вхідна різниця по координатах:</div>
-                <div>Δx₁ = {obj5.x1} - {obj7.x1} = <b>{dx1}</b> (модуль: {absDx1})</div>
-                <div>Δx₂ = {obj5.x2} - {obj7.x2} = <b>{dx2}</b> (модуль: {absDx2})</div>
+                <div>Δx₁ (Об'єкт {obj5.id} - Об'єкт {obj7.id}) = {obj5.x1} - {obj7.x1} = <b>{dx1}</b> (модуль: {absDx1})</div>
+                <div>Δx₂ (Об'єкт {obj5.id} - Об'єкт {obj7.id}) = {obj5.x2} - {obj7.x2} = <b>{dx2}</b> (модуль: {absDx2})</div>
               </div>
 
               {/* Euclidean */}
@@ -275,7 +275,7 @@ export const Lab1 = () => {
             style={{ height: '100%' }}
           >
             <Paragraph>
-              Побудова симетричної квадратної матриці відстаней з нулями на головній діагоналі для чотирьох об'єктів (1, 2, 3, 8). Метрика: <b>Відстань Евкліда</b>.
+              Побудова симетричної квадратної матриці відстаней з нулями на головній діагоналі для чотирьох об'єктів ({t2Objects.map(o => o.id).join(', ')}). Метрика: <b>{lab1Data.task2.metric === 'Euclidean' ? 'Відстань Евкліда' : lab1Data.task2.metric === 'Squared Euclidean' ? 'Квадрат відстані Евкліда' : lab1Data.task2.metric === 'Manhattan' ? 'Манхеттенська відстань' : lab1Data.task2.metric === 'Chebyshev' ? 'Відстань Чебишева' : 'Пікова відстань'}</b>.
             </Paragraph>
             
             <div style={{ marginBottom: 20 }}>

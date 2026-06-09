@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Layout, Menu, Button, theme, Breadcrumb } from 'antd';
+import { Layout, Menu, Button, theme, Breadcrumb, Select } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useStore } from '../store/useStore';
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -18,6 +19,7 @@ export const NavigationLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { currentVariant, selectVariant } = useStore();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
@@ -132,8 +134,17 @@ export const NavigationLayout = ({ children }) => {
             />
             <Breadcrumb items={getBreadcrumbItems()} />
           </div>
-          <div style={{ fontWeight: 600, color: '#8c8c8c' }}>
-            Варіант 1 • Студентський Проєкт
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontWeight: 600, color: '#595959' }}>Обрати варіант:</span>
+            <Select
+              value={currentVariant}
+              onChange={selectVariant}
+              style={{ width: 130 }}
+              options={Array.from({ length: 24 }, (_, i) => ({
+                value: i + 1,
+                label: `Варіант ${i + 1}`
+              }))}
+            />
           </div>
         </Header>
         <Content

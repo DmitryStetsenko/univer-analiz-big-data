@@ -9,6 +9,31 @@ export const calculateEuclideanDistance = (objA, objB, keys = ['x', 'y']) => {
   return Math.sqrt(sumSq);
 };
 
+// Calculate distance based on specific metric
+export const calculateDistanceByMetric = (objA, objB, metric, keys = ['x1', 'x2']) => {
+  const dx1 = (objA[keys[0]] ?? 0) - (objB[keys[0]] ?? 0);
+  const dx2 = (objA[keys[1]] ?? 0) - (objB[keys[1]] ?? 0);
+  const absDx1 = Math.abs(dx1);
+  const absDx2 = Math.abs(dx2);
+
+  switch (metric) {
+    case 'Euclidean':
+      return Math.sqrt(dx1 * dx1 + dx2 * dx2);
+    case 'Squared Euclidean':
+      return dx1 * dx1 + dx2 * dx2;
+    case 'Manhattan':
+      return absDx1 + absDx2;
+    case 'Chebyshev':
+      return Math.max(absDx1, absDx2);
+    case 'Power Distance':
+      // Power distance with default p=2, r=1
+      return Math.pow(Math.pow(absDx1, 2) + Math.pow(absDx2, 2), 1 / 1);
+    default:
+      return Math.sqrt(dx1 * dx1 + dx2 * dx2);
+  }
+};
+
+
 // Main function to run Hierarchical Agglomerative Clustering
 // objects: Array of { id, x, y }
 // method: 'single' (nearest neighbor) or 'complete' (furthest neighbor)

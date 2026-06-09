@@ -1,7 +1,9 @@
 import { create } from 'zustand';
-import lab1Default from '../data/variants/1/lab1.json';
-import labsDefault from '../data/variants/1/labs2_3.json';
 import { runHierarchicalClustering } from '../utils/clustering';
+
+const variantFiles = import.meta.glob('../data/variants/**/*.json', { eager: true });
+const lab1Default = variantFiles['../data/variants/1/lab1.json'].default;
+const labsDefault = variantFiles['../data/variants/1/labs2_3.json'].default;
 
 export const useStore = create((set, get) => {
   // Run initial clustering for Lab 2 and 3 so steps are cached
@@ -9,6 +11,8 @@ export const useStore = create((set, get) => {
   const initialLab3 = runHierarchicalClustering(labsDefault.objects, 'complete');
 
   return {
+    currentVariant: 1,
+
     // === Lab 1 State ===
     lab1Data: {
       task1: {
@@ -144,6 +148,42 @@ export const useStore = create((set, get) => {
       const target = method === 'single' ? 'singleLinkage' : 'completeLinkage';
       const currentIndex = get().labsData[target].currentStepIndex;
       get().setStepIndex(method, currentIndex - 1);
+    },
+
+    selectVariant: (variantId) => {
+      const vId = parseInt(variantId) || 1;
+      const lab1Data = variantFiles[`../data/variants/${vId}/lab1.json`].default;
+      const labsDataVal = variantFiles[`../data/variants/${vId}/labs2_3.json`].default;
+      
+      const singleClustering = runHierarchicalClustering(labsDataVal.objects, 'single');
+      const completeClustering = runHierarchicalClustering(labsDataVal.objects, 'complete');
+
+      set({
+        currentVariant: vId,
+        lab1Data: {
+          task1: {
+            objects: [...lab1Data.task1.objects],
+            p: 2,
+            r: 1
+          },
+          task2: {
+            objects: [...lab1Data.task2.objects]
+          }
+        },
+        labsData: {
+          objects: [...labsDataVal.objects],
+          singleLinkage: {
+            steps: singleClustering.steps,
+            dendrogram: singleClustering.dendrogram,
+            currentStepIndex: 0
+          },
+          completeLinkage: {
+            steps: completeClustering.steps,
+            dendrogram: completeClustering.dendrogram,
+            currentStepIndex: 0
+          }
+        }
+      });
     }
   };
 });
