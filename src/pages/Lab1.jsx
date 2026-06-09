@@ -1,8 +1,8 @@
 import React from 'react';
 import { useStore } from '../store/useStore';
-import { Table, Card, InputNumber, Row, Col, Typography, Divider, Space, Tag } from 'antd';
+import { Table, Card, InputNumber, Row, Col, Typography, Divider, Space, Tag, Button } from 'antd';
 import { calculateDistanceByMetric } from '../utils/clustering';
-import { CalculatorOutlined, InfoCircleOutlined, TableOutlined } from '@ant-design/icons';
+import { CalculatorOutlined, InfoCircleOutlined, TableOutlined, ExperimentOutlined } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -134,11 +134,21 @@ export const Lab1 = () => {
 
   return (
     <div>
-      <div style={{ marginBottom: 24 }}>
-        <Title level={2}>Лабораторна робота №1</Title>
-        <Paragraph style={{ color: '#8c8c8c' }}>
-          Тема: Обчислення мір близькості для числових даних. Варіант {currentVariant}.
-        </Paragraph>
+      <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
+        <div>
+          <Title level={2} style={{ margin: 0 }}>Лабораторна робота №1</Title>
+          <Paragraph style={{ color: '#8c8c8c', margin: '4px 0 0 0' }}>
+            Тема: Обчислення мір близькості для числових даних. Варіант {currentVariant}.
+          </Paragraph>
+        </div>
+        <Button 
+          type="primary" 
+          icon={<ExperimentOutlined />} 
+          href="/#/practical?tab=recommendations"
+          style={{ background: 'linear-gradient(90deg, #1677ff, #722ed1)', border: 'none', borderRadius: 6 }}
+        >
+          Дивитись практичне застосування
+        </Button>
       </div>
 
       <Row gutter={[24, 24]}>

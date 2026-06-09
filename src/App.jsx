@@ -7,6 +7,7 @@ import { Lab2 } from './pages/Lab2';
 import { Lab3 } from './pages/Lab3';
 import { Theory } from './pages/Theory';
 import { Exam } from './pages/Exam';
+import { PracticalApplication } from './pages/PracticalApplication';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/lab3" element={<Lab3 />} />
             <Route path="/theory" element={<Theory />} />
             <Route path="/exam" element={<Exam />} />
+            <Route path="/practical" element={<PracticalApplication />} />
           </Routes>
         </NavigationLayout>
       </HashRouter>

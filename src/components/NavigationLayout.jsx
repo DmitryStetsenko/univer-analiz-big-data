@@ -10,7 +10,8 @@ import {
   ClusterOutlined,
   BookOutlined,
   QuestionCircleOutlined,
-  BarChartOutlined
+  BarChartOutlined,
+  ExperimentOutlined
 } from '@ant-design/icons';
 
 const { Header, Sider, Content, Footer } = Layout;
@@ -49,6 +50,11 @@ export const NavigationLayout = ({ children }) => {
       key: '/exam',
       icon: <QuestionCircleOutlined />,
       label: 'Екзаменаційні питання',
+    },
+    {
+      key: '/practical',
+      icon: <ExperimentOutlined />,
+      label: 'Практичне застосування',
     },
   ];
 
