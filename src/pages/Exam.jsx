@@ -20,14 +20,25 @@ export const Exam = () => {
       case 13: // Classification vs Clustering
         return (
           <div style={{ marginTop: 16, background: '#fafafa', padding: 20, borderRadius: 12, border: '1px solid #f0f0f0' }}>
-            <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
+            <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
               <BulbOutlined style={{ color: '#faad14', fontSize: 18 }} /> Схема: Порівняння задач класифікації та кластеризації
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap' }}>
               {/* Classification SVG */}
-              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 360 }}>
-                <div style={{ fontSize: 13, fontWeight: '600', marginBottom: 8, color: '#434343' }}>Класифікація (Навчання з вчителем)</div>
-                <svg width="100%" height="220" viewBox="0 0 280 200" style={{ background: '#fff', border: '1px solid #e8e8e8', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 380 }}>
+                <div style={{ fontSize: 14, fontWeight: '600', marginBottom: 8, color: '#262626' }}>Класифікація (Навчання з вчителем)</div>
+                <svg 
+                  viewBox="0 0 280 200" 
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto', 
+                    background: '#fff', 
+                    border: '1px solid #e8e8e8', 
+                    borderRadius: 8, 
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                    display: 'block'
+                  }}
+                >
                   <defs>
                     <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
                       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f5f5f5" strokeWidth="1" />
@@ -39,25 +50,36 @@ export const Exam = () => {
                   <circle cx="60" cy="50" r="9" fill="#ff4d4f" stroke="#ff7875" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 2px 4px rgba(255, 77, 79, 0.2))' }} />
                   <circle cx="85" cy="75" r="9" fill="#ff4d4f" stroke="#ff7875" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 2px 4px rgba(255, 77, 79, 0.2))' }} />
                   <circle cx="50" cy="100" r="9" fill="#ff4d4f" stroke="#ff7875" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 2px 4px rgba(255, 77, 79, 0.2))' }} />
-                  <text x="65" y="135" fontSize="12" fill="#d32029" fontWeight="bold" textAnchor="middle">Клас А (червоні)</text>
+                  <text x="65" y="135" fontSize="13" fill="#a8071a" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Клас А (червоні)</text>
                   
                   {/* Class B - Blue Squares */}
                   <rect x="190" y="40" width="18" height="18" rx="2" fill="#1890ff" stroke="#69c0ff" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 2px 4px rgba(24, 144, 255, 0.2))' }} />
                   <rect x="215" y="75" width="18" height="18" rx="2" fill="#1890ff" stroke="#69c0ff" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 2px 4px rgba(24, 144, 255, 0.2))' }} />
                   <rect x="175" y="90" width="18" height="18" rx="2" fill="#1890ff" stroke="#69c0ff" strokeWidth="1.5" style={{ filter: 'drop-shadow(0px 2px 4px rgba(24, 144, 255, 0.2))' }} />
-                  <text x="195" y="135" fontSize="12" fill="#096dd9" fontWeight="bold" textAnchor="middle">Клас Б (сині)</text>
+                  <text x="195" y="135" fontSize="13" fill="#0050b3" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Клас Б (сині)</text>
                   
                   {/* Decision Boundary Line */}
                   <line x1="130" y1="15" x2="130" y2="160" stroke="#bfbfbf" strokeWidth="2.5" strokeDasharray="5 4" />
                   <path d="M 130 15 L 125 25 L 135 25 Z" fill="#bfbfbf" />
-                  <text x="130" y="180" fontSize="11" fill="#8c8c8c" fontWeight="500" textAnchor="middle">Відома межа розділу</text>
+                  <text x="130" y="180" fontSize="12" fill="#595959" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3" paintOrder="stroke" strokeLinejoin="round">Відома межа розділу</text>
                 </svg>
               </div>
 
               {/* Clustering SVG */}
-              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 360 }}>
-                <div style={{ fontSize: 13, fontWeight: '600', marginBottom: 8, color: '#434343' }}>Кластеризація (Навчання без вчителя)</div>
-                <svg width="100%" height="220" viewBox="0 0 280 200" style={{ background: '#fff', border: '1px solid #e8e8e8', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 380 }}>
+                <div style={{ fontSize: 14, fontWeight: '600', marginBottom: 8, color: '#262626' }}>Кластеризація (Навчання без вчителя)</div>
+                <svg 
+                  viewBox="0 0 280 200" 
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto', 
+                    background: '#fff', 
+                    border: '1px solid #e8e8e8', 
+                    borderRadius: 8, 
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                    display: 'block'
+                  }}
+                >
                   <rect width="280" height="200" fill="url(#grid-pattern)" />
                   
                   {/* Unlabeled Gray Circles */}
@@ -66,16 +88,16 @@ export const Exam = () => {
                   <circle cx="85" cy="75" r="8" fill="#8c8c8c" stroke="#bfbfbf" />
                   <circle cx="50" cy="95" r="8" fill="#8c8c8c" stroke="#bfbfbf" />
                   <ellipse cx="66" cy="73" rx="36" ry="42" fill="none" stroke="#52c41a" strokeWidth="2.5" strokeDasharray="3 2" style={{ filter: 'drop-shadow(0px 2px 4px rgba(82, 196, 26, 0.2))' }} />
-                  <text x="66" y="135" fontSize="12" fill="#389e0d" fontWeight="bold" textAnchor="middle">Кластер 1</text>
+                  <text x="66" y="135" fontSize="13" fill="#135200" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Кластер 1</text>
 
                   {/* Cluster Group 2 */}
                   <circle cx="195" cy="50" r="8" fill="#8c8c8c" stroke="#bfbfbf" />
                   <circle cx="215" cy="85" r="8" fill="#8c8c8c" stroke="#bfbfbf" />
                   <circle cx="180" cy="95" r="8" fill="#8c8c8c" stroke="#bfbfbf" />
                   <ellipse cx="196" cy="76" rx="34" ry="40" fill="none" stroke="#722ed1" strokeWidth="2.5" strokeDasharray="3 2" style={{ filter: 'drop-shadow(0px 2px 4px rgba(114, 46, 209, 0.2))' }} />
-                  <text x="196" y="135" fontSize="12" fill="#531dab" fontWeight="bold" textAnchor="middle">Кластер 2</text>
+                  <text x="196" y="135" fontSize="13" fill="#391085" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Кластер 2</text>
 
-                  <text x="140" y="180" fontSize="11" fill="#8c8c8c" fontWeight="500" textAnchor="middle">Групування за близькістю (без міток)</text>
+                  <text x="140" y="180" fontSize="12" fill="#595959" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3" paintOrder="stroke" strokeLinejoin="round">Групування за близькістю (без міток)</text>
                 </svg>
               </div>
             </div>
@@ -84,11 +106,23 @@ export const Exam = () => {
       case 14: // Types of Hierarchical Clustering (Agglomerative vs Divisive)
         return (
           <div style={{ marginTop: 16, background: '#fafafa', padding: 20, borderRadius: 12, border: '1px solid #f0f0f0' }}>
-            <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
+            <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
               <BulbOutlined style={{ color: '#faad14', fontSize: 18 }} /> Схема: Напрями побудови ієрархії
             </div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <svg width="100%" height="280" viewBox="0 0 480 240" style={{ background: '#fff', border: '1px solid #e8e8e8', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+              <svg 
+                viewBox="0 0 480 240" 
+                style={{ 
+                  width: '100%', 
+                  maxWidth: '580px', 
+                  height: 'auto', 
+                  background: '#fff', 
+                  border: '1px solid #e8e8e8', 
+                  borderRadius: 8, 
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                  display: 'block'
+                }}
+              >
                 <defs>
                   <linearGradient id="root-grad" x1="0%" y1="0%" x2="0%" y2="100%">
                     <stop offset="0%" stopColor="#f5f5f5" />
@@ -104,10 +138,10 @@ export const Exam = () => {
                   </linearGradient>
                   
                   <marker id="arrow-up" viewBox="0 0 10 10" refX="5" refY="0" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 5 0 L 10 10 L 0 10 z" fill="#52c41a" />
+                    <path d="M 5 0 L 10 10 L 0 10 z" fill="#135200" />
                   </marker>
                   <marker id="arrow-down" viewBox="0 0 10 10" refX="5" refY="10" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 5 10 L 0 0 L 10 0 z" fill="#ff4d4f" />
+                    <path d="M 5 10 L 0 0 L 10 0 z" fill="#a8071a" />
                   </marker>
                 </defs>
                 
@@ -118,24 +152,24 @@ export const Exam = () => {
 
                 {/* Left Branch (AB) */}
                 <rect x="90" y="95" width="70" height="30" rx="6" fill="url(#ab-grad)" stroke="#91d5ff" strokeWidth="1.5" />
-                <text x="125" y="114" fontSize="12" fontWeight="bold" fill="#0050b3" textAnchor="middle">AB</text>
+                <text x="125" y="114" fontSize="13" fontWeight="bold" fill="#003a8c" textAnchor="middle">AB</text>
 
                 {/* Right Branch (CD) */}
                 <rect x="320" y="95" width="70" height="30" rx="6" fill="url(#cd-grad)" stroke="#d3adf7" strokeWidth="1.5" />
-                <text x="355" y="114" fontSize="12" fontWeight="bold" fill="#531dab" textAnchor="middle">CD</text>
+                <text x="355" y="114" fontSize="13" fontWeight="bold" fill="#391085" textAnchor="middle">CD</text>
 
                 {/* Leaves */}
                 <circle cx="75" cy="180" r="16" fill="#fff" stroke="#1890ff" strokeWidth="2" />
-                <text x="75" y="185" fontSize="13" fontWeight="bold" fill="#1890ff" textAnchor="middle">A</text>
+                <text x="75" y="185" fontSize="14" fontWeight="bold" fill="#0050b3" textAnchor="middle">A</text>
                 
                 <circle cx="175" cy="180" r="16" fill="#fff" stroke="#1890ff" strokeWidth="2" />
-                <text x="175" y="185" fontSize="13" fontWeight="bold" fill="#1890ff" textAnchor="middle">B</text>
+                <text x="175" y="185" fontSize="14" fontWeight="bold" fill="#0050b3" textAnchor="middle">B</text>
 
                 <circle cx="305" cy="180" r="16" fill="#fff" stroke="#722ed1" strokeWidth="2" />
-                <text x="305" y="185" fontSize="13" fontWeight="bold" fill="#722ed1" textAnchor="middle">C</text>
+                <text x="305" y="185" fontSize="14" fontWeight="bold" fill="#531dab" textAnchor="middle">C</text>
                 
                 <circle cx="405" cy="180" r="16" fill="#fff" stroke="#722ed1" strokeWidth="2" />
-                <text x="405" y="185" fontSize="13" fontWeight="bold" fill="#722ed1" textAnchor="middle">D</text>
+                <text x="405" y="185" fontSize="14" fontWeight="bold" fill="#531dab" textAnchor="middle">D</text>
 
                 {/* Connection lines */}
                 <line x1="240" y1="54" x2="125" y2="95" stroke="#bfbfbf" strokeWidth="2" />
@@ -148,11 +182,11 @@ export const Exam = () => {
 
                 {/* Left Arrow (Agglomerative) */}
                 <path d="M 30 190 L 30 35" fill="none" stroke="#52c41a" strokeWidth="3" markerEnd="url(#arrow-up)" />
-                <text x="20" y="110" fontSize="11" fill="#389e0d" fontWeight="bold" transform="rotate(-90 20 110)" textAnchor="middle">Агломеративний ↑ (Знизу-вгору)</text>
+                <text x="20" y="110" fontSize="12" fill="#135200" fontWeight="bold" transform="rotate(-90 20 110)" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Агломеративний ↑ (Знизу-вгору)</text>
 
                 {/* Right Arrow (Divisive) */}
                 <path d="M 450 30 L 450 185" fill="none" stroke="#ff4d4f" strokeWidth="3" markerEnd="url(#arrow-down)" />
-                <text x="462" y="110" fontSize="11" fill="#d32029" fontWeight="bold" transform="rotate(90 462 110)" textAnchor="middle">↓ Дивізивний (Зверху-вниз)</text>
+                <text x="462" y="110" fontSize="12" fill="#a8071a" fontWeight="bold" transform="rotate(90 462 110)" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">↓ Дивізивний (Зверху-вниз)</text>
               </svg>
             </div>
           </div>
@@ -163,18 +197,18 @@ export const Exam = () => {
             <div style={{ fontWeight: 600, marginBottom: 10, display: 'flex', alignItems: 'center', gap: 6 }}>
               <BulbOutlined style={{ color: '#faad14' }} /> Схема: Алгоритм кластерного аналізу
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 12 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6, fontSize: 13.5 }}>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Badge count={1} status="processing" style={{ backgroundColor: '#108ee9' }} />
                 <span><b>Вибір ознак:</b> визначення набору числових параметрів об'єктів.</span>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Badge count={2} status="processing" style={{ backgroundColor: '#108ee9' }} />
-                <span><b>Стандартизація:</b> приведення ознак до однакового масштабу.</span>
+                <span><b>Стандартизація:</b> приведення ознак до опрацьовуваного масштабу.</span>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Badge count={3} status="processing" style={{ backgroundColor: '#108ee9' }} />
-                <span><b>Міра близькості:</b> вибір формули розрахунку відстані (напр. Евклід).</span>
+                <span><b>Міра близості:</b> вибір формули розрахунку відстані (напр. Евклід).</span>
               </div>
               <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
                 <Badge count={4} status="processing" style={{ backgroundColor: '#108ee9' }} />
@@ -198,14 +232,25 @@ export const Exam = () => {
       case 16: // Linkage Methods
         return (
           <div style={{ marginTop: 16, background: '#fafafa', padding: 20, borderRadius: 12, border: '1px solid #f0f0f0' }}>
-            <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
+            <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
               <BulbOutlined style={{ color: '#faad14', fontSize: 18 }} /> Схема: Визначення відстаней між кластерами (Linkage Methods)
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: 32, flexWrap: 'wrap' }}>
               {/* Single Linkage SVG */}
-              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 360 }}>
-                <div style={{ fontSize: 13, fontWeight: '600', marginBottom: 8, color: '#434343' }}>Метод найближчого сусіда (Single Linkage)</div>
-                <svg width="100%" height="220" viewBox="0 0 280 200" style={{ background: '#fff', border: '1px solid #e8e8e8', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 380 }}>
+                <div style={{ fontSize: 14, fontWeight: '600', marginBottom: 8, color: '#262626' }}>Метод найближчого сусіда (Single Linkage)</div>
+                <svg 
+                  viewBox="0 0 280 200" 
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto', 
+                    background: '#fff', 
+                    border: '1px solid #e8e8e8', 
+                    borderRadius: 8, 
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                    display: 'block'
+                  }}
+                >
                   <defs>
                     <pattern id="grid-pattern-2" width="20" height="20" patternUnits="userSpaceOnUse">
                       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#f5f5f5" strokeWidth="1" />
@@ -217,43 +262,54 @@ export const Exam = () => {
                   <circle cx="50" cy="75" r="7" fill="#1890ff" />
                   <circle cx="75" cy="95" r="7" fill="#1890ff" /> {/* closest point to B */}
                   <circle cx="45" cy="120" r="7" fill="#1890ff" />
-                  <text x="60" y="165" fontSize="12" fill="#096dd9" fontWeight="bold">Кластер A</text>
+                  <text x="60" y="165" fontSize="13" fill="#0050b3" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Кластер A</text>
                   
                   {/* Cluster B */}
                   <ellipse cx="220" cy="105" rx="35" ry="45" fill="none" stroke="#d3adf7" strokeWidth="2.5" />
                   <circle cx="205" cy="85" r="7" fill="#722ed1" /> {/* closest point to A */}
                   <circle cx="235" cy="115" r="7" fill="#722ed1" />
                   <circle cx="210" cy="130" r="7" fill="#722ed1" />
-                  <text x="220" y="170" fontSize="12" fill="#531dab" fontWeight="bold" textAnchor="middle">Кластер B</text>
+                  <text x="220" y="170" fontSize="13" fill="#531dab" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Кластер B</text>
 
                   {/* Distance line (closest points) */}
-                  <line x1="75" y1="95" x2="205" y2="85" stroke="#f5222d" strokeWidth="2.5" strokeDasharray="5 3" />
-                  <text x="140" y="75" fontSize="12" fill="#f5222d" fontWeight="bold" textAnchor="middle">D(A, B) = min d(a, b)</text>
+                  <line x1="75" y1="95" x2="205" y2="85" stroke="#cf1322" strokeWidth="2.5" strokeDasharray="5 3" />
+                  <text x="140" y="75" fontSize="12" fill="#a8071a" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">D(A, B) = min d(a, b)</text>
                 </svg>
               </div>
 
               {/* Complete Linkage SVG */}
-              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 360 }}>
-                <div style={{ fontSize: 13, fontWeight: '600', marginBottom: 8, color: '#434343' }}>Метод найдальшого сусіда (Complete Linkage)</div>
-                <svg width="100%" height="220" viewBox="0 0 280 200" style={{ background: '#fff', border: '1px solid #e8e8e8', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+              <div style={{ textAlign: 'center', flex: '1 1 300px', maxWidth: 380 }}>
+                <div style={{ fontSize: 14, fontWeight: '600', marginBottom: 8, color: '#262626' }}>Метод найдальшого сусіда (Complete Linkage)</div>
+                <svg 
+                  viewBox="0 0 280 200" 
+                  style={{ 
+                    width: '100%', 
+                    height: 'auto', 
+                    background: '#fff', 
+                    border: '1px solid #e8e8e8', 
+                    borderRadius: 8, 
+                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                    display: 'block'
+                  }}
+                >
                   <rect width="280" height="200" fill="url(#grid-pattern-2)" />
                   {/* Cluster A */}
                   <ellipse cx="60" cy="95" rx="35" ry="50" fill="none" stroke="#91d5ff" strokeWidth="2.5" />
                   <circle cx="50" cy="75" r="7" fill="#1890ff" />
                   <circle cx="75" cy="95" r="7" fill="#1890ff" />
                   <circle cx="45" cy="120" r="7" fill="#1890ff" /> {/* furthest point from B */}
-                  <text x="60" y="165" fontSize="12" fill="#096dd9" fontWeight="bold">Кластер A</text>
+                  <text x="60" y="165" fontSize="13" fill="#0050b3" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Кластер A</text>
                   
                   {/* Cluster B */}
                   <ellipse cx="220" cy="105" rx="35" ry="45" fill="none" stroke="#d3adf7" strokeWidth="2.5" />
                   <circle cx="205" cy="85" r="7" fill="#722ed1" />
                   <circle cx="235" cy="115" r="7" fill="#722ed1" /> {/* furthest point from A */}
                   <circle cx="210" cy="130" r="7" fill="#722ed1" />
-                  <text x="220" y="170" fontSize="12" fill="#531dab" fontWeight="bold" textAnchor="middle">Кластер B</text>
+                  <text x="220" y="170" fontSize="13" fill="#531dab" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">Кластер B</text>
 
                   {/* Distance line (furthest points) */}
-                  <line x1="45" y1="120" x2="235" y2="115" stroke="#f5222d" strokeWidth="2.5" strokeDasharray="5 3" />
-                  <text x="140" y="150" fontSize="12" fill="#f5222d" fontWeight="bold" textAnchor="middle">D(A, B) = max d(a, b)</text>
+                  <line x1="45" y1="120" x2="235" y2="115" stroke="#cf1322" strokeWidth="2.5" strokeDasharray="5 3" />
+                  <text x="140" y="150" fontSize="12" fill="#a8071a" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">D(A, B) = max d(a, b)</text>
                 </svg>
               </div>
             </div>
@@ -262,31 +318,31 @@ export const Exam = () => {
       case 17: // Proximity Matrix
         return (
           <div style={{ marginTop: 16, background: '#fafafa', padding: 20, borderRadius: 12, border: '1px solid #f0f0f0' }}>
-            <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
+            <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
               <BulbOutlined style={{ color: '#faad14', fontSize: 18 }} /> Схема: Порівняння властивостей матриць близькості
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 24 }}>
-              <Card size="small" title={<span style={{ color: '#d46b08', fontSize: 14, fontWeight: 'bold' }}>Матриця відстаней (Dissimilarity)</span>} style={{ width: 280, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                <div style={{ fontFamily: 'monospace', fontSize: 13, lineHeight: 1.8 }}>
-                  d_ii = <b style={{ color: '#cf1322', fontSize: 14 }}>0</b> (на діагоналі завжди нулі)
+              <Card size="small" title={<span style={{ color: '#b26206', fontSize: 14.5, fontWeight: 'bold' }}>Матриця відстаней (Dissimilarity)</span>} style={{ width: 300, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                <div style={{ fontFamily: 'SFMono-Regular, Consolas, monospace', fontSize: 13.5, lineHeight: 1.8 }}>
+                  d_ii = <b style={{ color: '#cf1322', fontSize: 14.5 }}>0</b> (на діагоналі завжди нулі)
                   <br />
                   d_ij ≥ 0 (відстань невід'ємна)
                   <br />
                   d_ij = d_ji (симетричність)
                 </div>
-                <div style={{ marginTop: 12, color: '#8c8c8c', fontSize: 12, fontStyle: 'italic', borderTop: '1px solid #f0f0f0', paddingTop: 8 }}>
+                <div style={{ marginTop: 12, color: '#595959', fontSize: 12, fontStyle: 'italic', borderTop: '1px solid #f0f0f0', paddingTop: 8 }}>
                   * Менше значення означає вищу подібність об'єктів.
                 </div>
               </Card>
-              <Card size="small" title={<span style={{ color: '#389e0d', fontSize: 14, fontWeight: 'bold' }}>Матриця подібності (Similarity)</span>} style={{ width: 280, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
-                <div style={{ fontFamily: 'monospace', fontSize: 13, lineHeight: 1.8 }}>
-                  s_ii = <b style={{ color: '#389e0d', fontSize: 14 }}>1</b> (на діагоналі завжди одиниці)
+              <Card size="small" title={<span style={{ color: '#237804', fontSize: 14.5, fontWeight: 'bold' }}>Матриця подібності (Similarity)</span>} style={{ width: 300, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+                <div style={{ fontFamily: 'SFMono-Regular, Consolas, monospace', fontSize: 13.5, lineHeight: 1.8 }}>
+                  s_ii = <b style={{ color: '#389e0d', fontSize: 14.5 }}>1</b> (на діагоналі завжди одиниці)
                   <br />
                   s_ij ∈ [0, 1] або [-1, 1]
                   <br />
                   s_ij = s_ji (симетричність)
                 </div>
-                <div style={{ marginTop: 12, color: '#8c8c8c', fontSize: 12, fontStyle: 'italic', borderTop: '1px solid #f0f0f0', paddingTop: 8 }}>
+                <div style={{ marginTop: 12, color: '#595959', fontSize: 12, fontStyle: 'italic', borderTop: '1px solid #f0f0f0', paddingTop: 8 }}>
                   * Більше значення означає вищу подібність об'єктів.
                 </div>
               </Card>
@@ -296,11 +352,23 @@ export const Exam = () => {
       case 18: // Distance Measures
         return (
           <div style={{ marginTop: 16, background: '#fafafa', padding: 20, borderRadius: 12, border: '1px solid #f0f0f0' }}>
-            <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
+            <div style={{ fontWeight: 600, fontSize: 16, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 6, color: '#1f1f1f' }}>
               <BulbOutlined style={{ color: '#faad14', fontSize: 18 }} /> Візуалізація: Евклідова vs Манхеттенська відстань
             </div>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <svg width="100%" height="280" viewBox="0 0 380 280" style={{ background: '#fff', border: '1px solid #e8e8e8', borderRadius: 8, boxShadow: '0 2px 8px rgba(0,0,0,0.04)' }}>
+              <svg 
+                viewBox="0 0 380 280" 
+                style={{ 
+                  width: '100%', 
+                  maxWidth: '520px', 
+                  height: 'auto', 
+                  background: '#fff', 
+                  border: '1px solid #e8e8e8', 
+                  borderRadius: 8, 
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                  display: 'block'
+                }}
+              >
                 <defs>
                   <pattern id="coord-grid" width="30" height="30" patternUnits="userSpaceOnUse">
                     <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#f5f5f5" strokeWidth="1" />
@@ -309,39 +377,39 @@ export const Exam = () => {
                 <rect width="380" height="240" fill="url(#coord-grid)" />
                 
                 {/* Axes */}
-                <line x1="30" y1="20" x2="30" y2="220" stroke="#8c8c8c" strokeWidth="1.5" />
-                <line x1="30" y1="220" x2="350" y2="220" stroke="#8c8c8c" strokeWidth="1.5" />
+                <line x1="40" y1="20" x2="40" y2="220" stroke="#8c8c8c" strokeWidth="1.5" />
+                <line x1="40" y1="220" x2="360" y2="220" stroke="#8c8c8c" strokeWidth="1.5" />
                 
                 {/* Axis Labels */}
-                <text x="350" y="235" fontSize="11" fill="#595959" fontWeight="bold" textAnchor="end">Ознака X₁</text>
-                <text x="15" y="25" fontSize="11" fill="#595959" fontWeight="bold" transform="rotate(-90 15 25)" textAnchor="end">Ознака X₂</text>
+                <text x="360" y="235" fontSize="13" fill="#262626" fontWeight="bold" textAnchor="end" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">Ознака X₁</text>
+                <text x="20" y="25" fontSize="13" fill="#262626" fontWeight="bold" transform="rotate(-90 20 25)" textAnchor="end" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">Ознака X₂</text>
 
                 {/* Point A */}
-                <circle cx="90" cy="160" r="7" fill="#1890ff" stroke="#fff" strokeWidth="2" style={{ filter: 'drop-shadow(0px 2px 4px rgba(24, 144, 255, 0.4))' }} />
-                <text x="75" y="165" fontSize="12" fontWeight="bold" fill="#0050b3">A(x₁, y₁)</text>
+                <circle cx="90" cy="160" r="8" fill="#1890ff" stroke="#fff" strokeWidth="2" style={{ filter: 'drop-shadow(0px 2px 4px rgba(24, 144, 255, 0.4))' }} />
+                <text x="90" y="142" fontSize="13" fontWeight="bold" fill="#003a8c" stroke="#fff" strokeWidth="3" paintOrder="stroke" strokeLinejoin="round" textAnchor="middle">A(x₁, y₁)</text>
 
                 {/* Point B */}
-                <circle cx="270" cy="70" r="7" fill="#722ed1" stroke="#fff" strokeWidth="2" style={{ filter: 'drop-shadow(0px 2px 4px rgba(114, 46, 209, 0.4))' }} />
-                <text x="285" y="75" fontSize="12" fontWeight="bold" fill="#531dab">B(x₂, y₂)</text>
+                <circle cx="270" cy="70" r="8" fill="#722ed1" stroke="#fff" strokeWidth="2" style={{ filter: 'drop-shadow(0px 2px 4px rgba(114, 46, 209, 0.4))' }} />
+                <text x="270" y="52" fontSize="13" fontWeight="bold" fill="#391085" stroke="#fff" strokeWidth="3" paintOrder="stroke" strokeLinejoin="round" textAnchor="middle">B(x₂, y₂)</text>
 
                 {/* Euclidean path (red line) */}
-                <line x1="90" y1="160" x2="270" y2="70" stroke="#ff4d4f" strokeWidth="3.5" />
-                <text x="195" y="105" fontSize="11" fill="#ff4d4f" fontWeight="bold" transform="rotate(-26.5 195 105)" textAnchor="middle">d_E (Евклідова відстань)</text>
+                <line x1="90" y1="160" x2="270" y2="70" stroke="#cf1322" strokeWidth="3.5" />
+                <text x="180" y="105" fontSize="12" fill="#a8071a" fontWeight="bold" transform="rotate(-26.5 180 105)" textAnchor="middle" stroke="#fff" strokeWidth="3.5" paintOrder="stroke" strokeLinejoin="round">d_E (Евклідова відстань)</text>
 
                 {/* Manhattan path (green dashed steps) */}
-                <path d="M 90 160 L 270 160 L 270 70" fill="none" stroke="#52c41a" strokeWidth="3" strokeDasharray="5 3" />
-                <text x="180" y="175" fontSize="11" fill="#389e0d" fontWeight="bold" textAnchor="middle">Δx = |x₂ - x₁|</text>
-                <text x="285" y="120" fontSize="11" fill="#389e0d" fontWeight="bold">Δy = |y₂ - y₁|</text>
+                <path d="M 90 160 L 270 160 L 270 70" fill="none" stroke="#135200" strokeWidth="3" strokeDasharray="5 3" />
+                <text x="180" y="180" fontSize="12" fill="#135200" fontWeight="bold" textAnchor="middle" stroke="#fff" strokeWidth="3" paintOrder="stroke" strokeLinejoin="round">Δx = |x₂ - x₁|</text>
+                <text x="282" y="120" fontSize="12" fill="#135200" fontWeight="bold" stroke="#fff" strokeWidth="3" paintOrder="stroke" strokeLinejoin="round">Δy = |y₂ - y₁|</text>
 
                 {/* Legend container */}
                 <rect x="0" y="240" width="380" height="40" fill="#fafafa" stroke="#e8e8e8" strokeWidth="1" />
                 
                 {/* Legend Items */}
-                <line x1="25" y1="260" x2="55" y2="260" stroke="#ff4d4f" strokeWidth="3" />
-                <text x="62" y="264" fontSize="12" fill="#262626" fontWeight="500">Евклідова (пряма)</text>
+                <line x1="25" y1="260" x2="55" y2="260" stroke="#cf1322" strokeWidth="3" />
+                <text x="62" y="264" fontSize="12" fill="#262626" fontWeight="bold">Евклідова (пряма)</text>
 
-                <line x1="205" y1="260" x2="235" y2="260" stroke="#52c41a" strokeWidth="3" strokeDasharray="5 3" />
-                <text x="242" y="264" fontSize="12" fill="#262626" fontWeight="500">Манхеттенська (сітка)</text>
+                <line x1="205" y1="260" x2="235" y2="260" stroke="#135200" strokeWidth="3" strokeDasharray="5 3" />
+                <text x="242" y="264" fontSize="12" fill="#262626" fontWeight="bold">Манхеттенська (сітка)</text>
               </svg>
             </div>
           </div>

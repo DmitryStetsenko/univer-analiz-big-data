@@ -178,36 +178,47 @@ export const Theory = () => {
             </Paragraph>
 
             <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
-              <svg width="360" height="150" style={{ background: '#fafafa', borderRadius: 8, padding: 8 }}>
+              <svg 
+                viewBox="0 0 360 150" 
+                style={{ 
+                  width: '100%', 
+                  maxWidth: '360px', 
+                  height: 'auto', 
+                  background: '#fafafa', 
+                  borderRadius: 8, 
+                  padding: 8,
+                  display: 'block'
+                }}
+              >
                 {/* Markers for arrows */}
                 <defs>
                   <marker id="arrow-blue" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#1890ff" />
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#0050b3" />
                   </marker>
                   <marker id="arrow-green" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#52c41a" />
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#135200" />
                   </marker>
                 </defs>
 
                 {/* Divisive (Top-down) Column 1 */}
                 <rect x="10" y="10" width="150" height="30" rx="5" fill="#e6f7ff" stroke="#91d5ff" />
-                <text x="85" y="28" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#0050b3">1 Великий Кластер</text>
+                <text x="85" y="29" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#003a8c" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">1 Великий Кластер</text>
                 
-                <path d="M 40 45 L 40 105" stroke="#1890ff" strokeWidth="2" markerEnd="url(#arrow-blue)" />
-                <text x="50" y="80" fontSize="10" fill="#1890ff" fontWeight="bold">РОЗДІЛЕННЯ ↓</text>
+                <path d="M 40 45 L 40 105" stroke="#0050b3" strokeWidth="2" markerEnd="url(#arrow-blue)" />
+                <text x="50" y="80" fontSize="10.5" fill="#0050b3" fontWeight="bold" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">РОЗДІЛЕННЯ ↓</text>
                 
                 <rect x="10" y="110" width="150" height="30" rx="5" fill="#f5f5f5" stroke="#d9d9d9" />
-                <text x="85" y="128" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#595959">N Окремих Точок</text>
+                <text x="85" y="129" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#262626" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">N Окремих Точок</text>
 
                 {/* Agglomerative (Bottom-up) Column 2 */}
                 <rect x="200" y="10" width="150" height="30" rx="5" fill="#e6f7ff" stroke="#91d5ff" />
-                <text x="275" y="28" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#0050b3">1 Великий Кластер</text>
+                <text x="275" y="29" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#003a8c" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">1 Великий Кластер</text>
                 
-                <path d="M 230 105 L 230 45" stroke="#52c41a" strokeWidth="2" markerEnd="url(#arrow-green)" />
-                <text x="240" y="80" fontSize="10" fill="#52c41a" fontWeight="bold">ОБ'ЄДНАННЯ ↑</text>
+                <path d="M 230 105 L 230 45" stroke="#135200" strokeWidth="2" markerEnd="url(#arrow-green)" />
+                <text x="240" y="80" fontSize="10.5" fill="#135200" fontWeight="bold" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">ОБ'ЄДНАННЯ ↑</text>
                 
                 <rect x="200" y="110" width="150" height="30" rx="5" fill="#f5f5f5" stroke="#d9d9d9" />
-                <text x="275" y="128" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#595959">N Окремих Точок</text>
+                <text x="275" y="129" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#262626" stroke="#fff" strokeWidth="2.5" paintOrder="stroke" strokeLinejoin="round">N Окремих Точок</text>
               </svg>
             </div>
 
