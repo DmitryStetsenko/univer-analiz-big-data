@@ -307,37 +307,352 @@ export const Exam = () => {
     }
   };
 
-  // Convert raw markdown answers to simple list of elements for display
-  const formatAnswer = (question) => {
-    const textLines = question.answer.split('\n');
-    return (
-      <div style={{ padding: '0 8px' }}>
-        {textLines.map((line, idx) => {
-          if (line.trim().startsWith('- ') || line.trim().startsWith('* ')) {
+  // Convert raw markdown answers to beautifully formatted elements (lists, math, tables)
+  const renderFormattedContent = (content, questionId) => {
+    if (!content) return null;
+
+    const lines = content.split('\n');
+    const blocks = [];
+    
+    let currentList = null;
+    let currentTable = null;
+
+    const flushList = () => {
+      if (currentList) {
+        blocks.push({ type: 'list', data: currentList });
+        currentList = null;
+      }
+    };
+
+    const flushTable = () => {
+      if (currentTable) {
+        blocks.push({ type: 'table', data: currentTable });
+        currentTable = null;
+      }
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      // 1. Detect and parse markdown tables
+      if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+        flushList();
+        const cells = line.split('|').map(c => c.trim()).slice(1, -1);
+        
+        if (cells.every(c => c.startsWith('---') || c.startsWith(':---') || c.endsWith('---'))) {
+          continue; // Skip the markdown separator line
+        }
+
+        if (!currentTable) {
+          currentTable = { headers: cells, rows: [] };
+        } else {
+          currentTable.rows.push(cells);
+        }
+        continue;
+      } else {
+        flushTable();
+      }
+
+      // 2. Detect and parse lists
+      const listMatch = line.match(/^(\s*)([-*]|\d+\.)\s+(.*)$/);
+      if (listMatch) {
+        const indent = listMatch[1].length;
+        const text = listMatch[3];
+        
+        if (!currentList) {
+          currentList = [];
+        }
+        currentList.push({ indent, text });
+        continue;
+      } else {
+        if (trimmed === '' && i + 1 < lines.length && lines[i + 1].trim().match(/^([-*]|\d+\.)/)) {
+          continue; // Keep the list block open if next line is a list item
+        }
+        flushList();
+      }
+
+      // 3. Detect block math ($$ ... $$)
+      if (trimmed.startsWith('$$') && trimmed.endsWith('$$')) {
+        const mathContent = trimmed.slice(2, -2).trim();
+        blocks.push({ type: 'blockMath', text: mathContent });
+        continue;
+      }
+
+      // 4. Standalone paragraph
+      if (trimmed !== '') {
+        blocks.push({ type: 'paragraph', text: line });
+      }
+    }
+
+    flushList();
+    flushTable();
+
+    // Helper to translate LaTeX symbols to beautiful readable Unicode
+    const translateMath = (mathStr) => {
+      let result = mathStr;
+
+      // Translate specific words/phrases before generic substitutions
+      result = result
+        .replace(/\\bar\{x\}/g, 'x̄')
+        .replace(/\\bar\{y\}/g, 'ȳ')
+        .replace(/_\{total\}/g, 'заг')
+        .replace(/_\{between\}/g, 'між')
+        .replace(/_\{within\}/g, 'внутр')
+        .replace(/_\{crit\}/g, 'крит')
+        .replace(/t_\{crit\}/g, 't_крит')
+        .replace(/F_\{crit\}/g, 'F_крит')
+        .replace(/\\hat\{y\}_i/g, 'ŷᵢ');
+
+      // Fractions \frac{a}{b} -> (a) / (b)
+      result = result.replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '($1) / ($2)');
+      
+      // Math operators
+      result = result.replace(/\\sum_\{([^{}]+)\}/g, '∑$1')
+                     .replace(/\\sum/g, '∑')
+                     .replace(/\\cdot/g, '·')
+                     .replace(/\\in/g, '∈')
+                     .replace(/\\{/g, '{')
+                     .replace(/\\}/g, '}')
+                     .replace(/\\beta_0/g, 'β₀')
+                     .replace(/\\beta_1/g, 'β₁')
+                     .replace(/\\beta_2/g, 'β₂')
+                     .replace(/\\beta_k/g, 'βₖ')
+                     .replace(/\\beta_j/g, 'βⱼ')
+                     .replace(/\\beta/g, 'β')
+                     .replace(/\\alpha/g, 'α')
+                     .replace(/\\mu_1/g, 'μ₁')
+                     .replace(/\\mu_2/g, 'μ₂')
+                     .replace(/\\mu_k/g, 'μₖ')
+                     .replace(/\\mu/g, 'μ')
+                     .replace(/\\rho/g, 'ρ')
+                     .replace(/\\varepsilon/g, 'ε')
+                     .replace(/\\chi\^2/g, 'χ²')
+                     .replace(/\\sqrt/g, '√')
+                     .replace(/\\to/g, '→')
+                     .replace(/\\min/g, 'min')
+                     .replace(/\\max/g, 'max')
+                     .replace(/\\neq/g, '≠')
+                     .replace(/\\ge/g, '≥')
+                     .replace(/\\le/g, '≤')
+                     .replace(/\\times/g, '×')
+                     .replace(/\\circ/g, '°')
+                     .replace(/\\text\{C\}/g, 'C')
+                     .replace(/\\text\{[^{}]+\}/g, (m) => m.slice(6, -1));
+
+      // Unicode translator for subscripts
+      const toSubscript = (str) => {
+        const chars = {
+          '0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉',
+          '+':'₊','-':'₋','=':'₌','(':'₍',')':'₎',
+          'a':'ₐ','e':'ₑ','h':'ₕ','i':'ᵢ','j':'ⱼ','k':'ₖ','l':'ₗ','m':'ₘ','n':'ₙ','o':'ₒ','p':'ₚ','r':'ᵣ','s':'ₛ','t':'ₜ','u':'ᵤ','v':'ᵥ','x':'ₓ','y':'ᵧ',
+          'C':'꜀', 'E':'ₑ', 'M':'ₘ', 'P':'ₚ'
+        };
+        return str.split('').map(c => chars[c] || c).join('');
+      };
+
+      // Unicode translator for superscripts
+      const toSuperscript = (str) => {
+        const chars = {
+          '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹',
+          '+':'⁺','-':'⁻','=':'╜','(':'⁽',')':'⁾',
+          'n':'ⁿ','i':'ⁱ','p':'ᵖ','r':'ʳ','k':'ᵏ'
+        };
+        return str.split('').map(c => chars[c] || c).join('');
+      };
+
+      // Convert subscript blocks e.g. _{ik} -> ᵢₖ
+      result = result.replace(/_\{([^{}]+)\}/g, (match, p1) => toSubscript(p1));
+      // Convert single subscripts e.g. _i -> ᵢ
+      result = result.replace(/_([a-zA-Z0-9])/g, (match, p1) => toSubscript(p1));
+
+      // Convert superscript blocks e.g. ^{2} -> ²
+      result = result.replace(/\^\{([^{}]+)\}/g, (match, p1) => toSuperscript(p1));
+      // Convert single superscripts e.g. ^2 -> ²
+      result = result.replace(/\^([a-zA-Z0-9])/g, (match, p1) => toSuperscript(p1));
+
+      // Clean up parentheses, double spaces, and remaining backslashes
+      result = result.replace(/\(\(([^()]+)\)\)/g, '($1)');
+      result = result.replace(/\\/g, '');
+
+      return result;
+    };
+
+    // Parse inline tokens like $...$, **...**, `...` and handle <br> tags
+    const parseInline = (text) => {
+      if (!text) return '';
+      
+      // Handle HTML line breaks
+      if (text.includes('<br>') || text.includes('<br/>') || text.includes('<br />')) {
+        const lines = text.split(/<br\s*\/?>/i);
+        return lines.map((line, index) => (
+          <React.Fragment key={index}>
+            {index > 0 && <br />}
+            {parseInline(line)}
+          </React.Fragment>
+        ));
+      }
+
+      // Group 1: **bold** (nested content in Group 2)
+      // Group 3: *italic* (nested content in Group 4)
+      // Group 5: `code`   (nested content in Group 6)
+      // Group 7: $math$   (nested content in Group 8)
+      const regex = /(\*\*([^*]+)\*\*)|(\*([^*]+)\*)|(`([^`]+)`)|(\$([^$]+)\$)/g;
+      const parts = [];
+      let lastIndex = 0;
+      let match;
+
+      while ((match = regex.exec(text)) !== null) {
+        if (match.index > lastIndex) {
+          parts.push(text.slice(lastIndex, match.index));
+        }
+
+        if (match[1]) {
+          parts.push(<strong key={match.index}>{parseInline(match[2])}</strong>);
+        } else if (match[3]) {
+          parts.push(<em key={match.index}>{parseInline(match[4])}</em>);
+        } else if (match[5]) {
+          parts.push(
+            <code 
+              key={match.index} 
+              style={{ 
+                fontFamily: 'SFMono-Regular, Consolas, Courier, monospace', 
+                background: '#f5f5f5', 
+                padding: '2px 6px', 
+                borderRadius: 4, 
+                border: '1px solid #e8e8e8', 
+                fontSize: '0.88em',
+                color: '#c41d7f'
+              }}
+            >
+              {match[6]}
+            </code>
+          );
+        } else if (match[7]) {
+          parts.push(
+            <span 
+              key={match.index} 
+              style={{ 
+                fontFamily: 'Georgia, serif', 
+                fontStyle: 'italic', 
+                background: '#fafafa', 
+                padding: '0 4px', 
+                borderRadius: 3, 
+                color: '#cf1322',
+                fontWeight: 600
+              }}
+            >
+              {translateMath(match[8])}
+            </span>
+          );
+        }
+
+        lastIndex = regex.lastIndex;
+      }
+
+      if (lastIndex < text.length) {
+        parts.push(text.slice(lastIndex));
+      }
+
+      return parts;
+    };
+
+    const renderList = (items) => {
+      return (
+        <ul style={{ paddingLeft: 20, margin: '8px 0', listStyleType: 'disc' }}>
+          {items.map((item, idx) => {
+            const style = item.indent > 0 ? { marginLeft: item.indent * 12, listStyleType: 'circle' } : {};
             return (
-              <ul style={{ margin: '4px 0', paddingLeft: 20 }} key={idx}>
-                <li>
-                  {line.replace(/^[-*]\s+/, '')}
-                </li>
-              </ul>
+              <li key={idx} style={{ marginBottom: 6, lineHeight: 1.5, ...style }}>
+                {parseInline(item.text)}
+              </li>
+            );
+          })}
+        </ul>
+      );
+    };
+
+    return (
+      <div style={{ padding: '4px 8px', color: '#262626' }}>
+        {blocks.map((block, idx) => {
+          if (block.type === 'paragraph') {
+            const trimmed = block.text.trim();
+            if (trimmed.startsWith('**') && trimmed.endsWith('**')) {
+              return (
+                <Title 
+                  level={5} 
+                  key={idx} 
+                  style={{ marginTop: 16, marginBottom: 8, color: '#000', fontWeight: 600 }}
+                >
+                  {parseInline(trimmed.slice(2, -2))}
+                </Title>
+              );
+            }
+            return (
+              <Paragraph key={idx} style={{ marginBottom: 12, lineHeight: 1.6, fontSize: 14.5 }}>
+                {parseInline(block.text)}
+              </Paragraph>
             );
           }
-          if (line.startsWith('**') && line.endsWith('**')) {
-            return <Paragraph key={idx} style={{ marginTop: 12, marginBottom: 6, fontWeight: 'bold' }}>{line.replace(/\*\*/g, '')}</Paragraph>;
+          
+          if (block.type === 'list') {
+            return <div key={idx}>{renderList(block.data)}</div>;
           }
-          if (line.startsWith('$$') && line.endsWith('$$')) {
+
+          if (block.type === 'blockMath') {
             return (
-              <div style={{ margin: '12px 0', textAlign: 'center', background: '#f5f5f5', padding: '8px 12px', borderRadius: 4, fontFamily: 'monospace' }} key={idx}>
-                {line.replace(/\$\$/g, '')}
+              <div 
+                key={idx} 
+                style={{ 
+                  margin: '18px 0', 
+                  textAlign: 'center', 
+                  background: '#fafafa', 
+                  padding: '14px 20px', 
+                  borderRadius: 8, 
+                  borderLeft: '4px solid #1890ff',
+                  fontFamily: 'Georgia, serif', 
+                  fontSize: 16.5,
+                  fontStyle: 'italic',
+                  boxShadow: 'inset 0 0 4px rgba(0,0,0,0.01)'
+                }}
+              >
+                {parseInline('$' + block.text + '$')}
               </div>
             );
           }
-          if (line.trim() === '') {
-            return <div key={idx} style={{ height: 6 }} />;
+
+          if (block.type === 'table') {
+            return (
+              <div key={idx} style={{ margin: '18px 0', overflowX: 'auto' }}>
+                <table style={{ width: '100%', borderCollapse: 'collapse', borderRadius: 8, overflow: 'hidden', border: '1px solid #e8e8e8' }}>
+                  <thead>
+                    <tr style={{ background: '#fafafa' }}>
+                      {block.data.headers.map((h, i) => (
+                        <th key={i} style={{ padding: '10px 14px', borderBottom: '2px solid #e8e8e8', borderRight: '1px solid #e8e8e8', textAlign: 'left', fontWeight: 600, fontSize: 13.5, background: '#f5f5f5' }}>
+                          {parseInline(h)}
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {block.data.rows.map((row, rIdx) => (
+                      <tr key={rIdx} style={{ background: rIdx % 2 === 0 ? '#fff' : '#fafafa' }}>
+                        {row.map((cell, cIdx) => (
+                          <td key={cIdx} style={{ padding: '10px 14px', borderBottom: '1px solid #e8e8e8', borderRight: '1px solid #e8e8e8', fontSize: 13.5 }}>
+                            {parseInline(cell)}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
           }
-          return <Paragraph key={idx} style={{ marginBottom: 8, lineHeight: 1.6 }}>{line}</Paragraph>;
+
+          return null;
         })}
-        {renderVisualAid(question.id)}
+        {renderVisualAid(questionId)}
       </div>
     );
   };
@@ -352,10 +667,10 @@ export const Exam = () => {
         ) : (
           <Tag color="cyan" style={{ fontWeight: 600 }}>Тема: Стат. аналіз</Tag>
         )}
-        <Text strong style={{ fontSize: 14 }}>{q.title.replace(/^\d+\.\s+/, '')}</Text>
+        <Text strong style={{ fontSize: 14.5 }}>{q.title.replace(/^\d+\.\s+/, '')}</Text>
       </Space>
     ),
-    children: formatAnswer(q),
+    children: renderFormattedContent(q.answer, q.id),
   }));
 
   return (
