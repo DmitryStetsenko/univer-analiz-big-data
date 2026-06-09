@@ -262,7 +262,7 @@ export const ClusteringSimulation = ({ method = 'single' }) => {
             {/* Current Step Description Alert */}
             {currentStepIndex === 0 ? (
               <Alert
-                message="Початковий стан"
+                title="Початковий стан"
                 description="Всі об'єкти знаходяться в окремих одноелементних кластерах. Матриця відображає попарні Евклідові відстані. Осередки з рожевим підсвічуванням вказують на найближчу пару кластерів, яка буде об'єднана на наступному кроці."
                 type="info"
                 showIcon
@@ -270,7 +270,7 @@ export const ClusteringSimulation = ({ method = 'single' }) => {
               />
             ) : (
               <Alert
-                message={`Крок ${currentStepIndex}: Об'єднання кластерів`}
+                title={`Крок ${currentStepIndex}: Об'єднання кластерів`}
                 description={
                   <div>
                     На цьому кроці було об'єднано кластери: <b>{steps[currentStepIndex].merged?.join(' та ')}</b>. 

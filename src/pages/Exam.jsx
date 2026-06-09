@@ -382,7 +382,7 @@ export const Exam = () => {
         <Collapse
           items={accordionItems}
           defaultActiveKey={[]}
-          expandIconPosition="end"
+          expandIconPlacement="end"
           style={{ background: '#fff' }}
         />
       ) : (

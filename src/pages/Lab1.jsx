@@ -165,7 +165,7 @@ export const Lab1 = () => {
             <Divider>Параметри пікової відстані</Divider>
             <Row gutter={16} style={{ marginBottom: 24 }}>
               <Col span={12}>
-                <Space direction="vertical" style={{ width: '100%' }}>
+                <Space orientation="vertical" style={{ width: '100%' }}>
                   <Text type="secondary">Параметр p (степінь різниці):</Text>
                   <InputNumber
                     min={1}
@@ -177,7 +177,7 @@ export const Lab1 = () => {
                 </Space>
               </Col>
               <Col span={12}>
-                <Space direction="vertical" style={{ width: '100%' }}>
+                <Space orientation="vertical" style={{ width: '100%' }}>
                   <Text type="secondary">Параметр r (корінь степені):</Text>
                   <InputNumber
                     min={1}
@@ -191,7 +191,7 @@ export const Lab1 = () => {
             </Row>
 
             <Divider>Результати та математичний розпис</Divider>
-            <Space direction="vertical" style={{ width: '100%', gap: 16 }}>
+            <Space orientation="vertical" style={{ width: '100%', gap: 16 }}>
               {/* Formula and Step Breakdown */}
               <div style={{ background: '#fafafa', padding: 16, borderRadius: 8 }}>
                 <div style={{ fontWeight: 600, marginBottom: 8 }}>Вхідна різниця по координатах:</div>
