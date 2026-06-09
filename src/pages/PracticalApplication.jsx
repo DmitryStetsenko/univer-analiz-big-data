@@ -141,6 +141,34 @@ const MovieRecommendationDemo = () => {
 
   return (
     <Card bordered={false} style={{ background: '#fafafa' }}>
+      {/* Simple Explanation Block */}
+      <Card 
+        bordered={false} 
+        style={{ 
+          marginBottom: 24, 
+          background: '#e6f7ff', 
+          borderLeft: '4px solid #1677ff',
+          borderRadius: '0 8px 8px 0',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+        }}
+        size="small"
+      >
+        <Space direction="vertical" size="small" style={{ width: '100%' }}>
+          <Text strong style={{ fontSize: 16, color: '#0050b3' }}>
+            <InfoCircleOutlined /> Як працює рекомендація фільмів? (Простими словами)
+          </Text>
+          <Paragraph style={{ margin: 0, color: '#262626' }}>
+            Уявіть, що ви шукаєте фільм на вечір. Замість того, щоб обирати випадково, ви питаєте друга, чиї смаки 
+            найбільше збігаються з вашими. <b>Математично це працює так:</b>
+          </Paragraph>
+          <ul style={{ margin: 0, paddingLeft: 20, color: '#595959' }}>
+            <li><b>Крок 1:</b> Ви виставляєте свої оцінки відомим фільмам (рухаючи повзунки ліворуч).</li>
+            <li><b>Крок 2:</b> Алгоритм розраховує «відстань» (різницю) між вашими оцінками та оцінками інших людей. Що менша відстань — то сильніше збігаються ваші смаки з цією людиною (вона є вашим «найближчим сусідом»).</li>
+            <li><b>Крок 3:</b> Система знаходить фільм, який ваш «найближчий сусід» оцінив високо, але який ви ще не бачили, і рекомендує його вам.</li>
+          </ul>
+        </Space>
+      </Card>
+
       <Row gutter={[24, 24]}>
         {/* Sliders for user input */}
         <Col xs={24} lg={10}>
@@ -282,6 +310,36 @@ const CustomerSegmentationDemo = () => {
 
   return (
     <Card bordered={false} style={{ background: '#fafafa' }}>
+      {/* Simple Explanation Block */}
+      <Card 
+        bordered={false} 
+        style={{ 
+          marginBottom: 24, 
+          background: '#f6ffed', 
+          borderLeft: '4px solid #52c41a',
+          borderRadius: '0 8px 8px 0',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.03)'
+        }}
+        size="small"
+      >
+        <Space direction="vertical" size="small" style={{ width: '100%' }}>
+          <Text strong style={{ fontSize: 16, color: '#277515' }}>
+            <InfoCircleOutlined /> Як працює сегментація покупців (кластеризація)? (Простими словами)
+          </Text>
+          <Paragraph style={{ margin: 0, color: '#262626' }}>
+            Уявіть велику групу людей, яку треба розділити на менші компанії за спільними інтересами. Спочатку кожен 
+            стоїть сам по себе. Потім двоє людей з найбільш схожими інтересами об'єднуються в пару. До них приєднується третій... 
+            Зрештою утворюються окремі стійкі групи. <b>Математично це працює так:</b>
+          </Paragraph>
+          <ul style={{ margin: 0, paddingLeft: 20, color: '#595959' }}>
+            <li><b>Крок 1:</b> Кожен покупець наноситься на графік відповідно до свого річного доходу та індексу витрат.</li>
+            <li><b>Крок 2:</b> Алгоритм ієрархічної кластеризації знаходить двох покупців, що розташовані найближче на графіку, і об'єднує їх в одну групу.</li>
+            <li><b>Крок 3:</b> Процес повторюється: групи зливаються між собою, поки ми не отримаємо чіткі сегменти (наприклад, VIP-клієнтів, які багато заробляють і багато витрачають, або економних покупців).</li>
+            <li><b>Крок 4 (Користь):</b> Бізнес тепер може показувати кожній групі саме ту рекламу, яка їй цікава, замість того, щоб спамити всіх однаково.</li>
+          </ul>
+        </Space>
+      </Card>
+
       <Row gutter={[24, 24]}>
         {/* Scatter plot visualization */}
         <Col xs={24} lg={12}>
