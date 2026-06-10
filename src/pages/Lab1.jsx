@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../store/useStore';
-import { Table, Card, InputNumber, Row, Col, Typography, Divider, Space, Tag, Button } from 'antd';
+import { Table, Card, InputNumber, Row, Col, Typography, Divider, Space, Tag, Button, Collapse } from 'antd';
 import { calculateDistanceByMetric } from '../utils/clustering';
 import { CalculatorOutlined, InfoCircleOutlined, TableOutlined, ExperimentOutlined } from '@ant-design/icons';
 
@@ -132,6 +132,71 @@ export const Lab1 = () => {
     }))
   ];
 
+  const theoryItems = [
+    {
+      key: 'overview',
+      label: <span style={{ fontWeight: 600 }}><InfoCircleOutlined style={{ color: '#1677ff', marginRight: 8 }} /> Що відбувається в цій лабораторній роботі?</span>,
+      children: (
+        <div>
+          <Paragraph>
+            Ця лабораторна робота присвячена вивченню та практичному розрахунку <b>мір близькості (відстаней)</b> між об'єктами з числовими характеристиками. Обчислення відстані є фундаментальним кроком для багатьох алгоритмів аналізу даних та машинного навчання (наприклад, для методів кластеризації чи класифікації k-NN).
+          </Paragraph>
+          <Paragraph>
+            <b>Завдання 1:</b> Демонструє розрахунок 5 різних метрик відстані між двома об'єктами (за варіантом: Об'єкт {obj5.id} та Об'єкт {obj7.id}). Ви можете змінювати значення параметрів X1 та X2 у таблиці нижче, щоб побачити, як змінюються попарні відстані та формульний розпис у реальному часі.
+          </Paragraph>
+          <Paragraph style={{ marginBottom: 0 }}>
+            <b>Завдання 2:</b> Показує побудову <b>симетричної квадратної матриці відстаней</b> для чотирьох об'єктів. Матриця відображає відстані між усіма парами об'єктів. Головна діагональ складається з нулів (відстань від об'єкта до себе), а сама матриця є симетричною відносно діагоналі.
+          </Paragraph>
+        </div>
+      )
+    },
+    {
+      key: 'variables',
+      label: <span style={{ fontWeight: 600 }}><CalculatorOutlined style={{ color: '#722ed1', marginRight: 8 }} /> Опис змінних та показників</span>,
+      children: (
+        <Row gutter={[16, 16]}>
+          <Col xs={24} md={12}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: '#1677ff' }}>Вхідні змінні та параметри:</div>
+            <ul style={{ paddingLeft: 20, margin: 0 }}>
+              <li style={{ marginBottom: 6 }}>
+                <b>Об'єкт (ID)</b> — експериментальна сутність, що аналізується (наприклад, точка у просторі ознак).
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>Параметр X1 / X2 (Координати)</b> — числові ознаки, що описують властивості об'єкта та визначають його положення на координатній площині.
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>Δx₁ / Δx₂</b> — різниця координат об'єктів уздовж відповідних осей X1 та X2.
+              </li>
+              <li style={{ marginBottom: 0 }}>
+                <b>p та r</b> — параметри степеневої відстані (відстані Мінковського). <b>p</b> вказує ступінь піднесення різниць координат, а <b>r</b> визначає ступінь кореня.
+              </li>
+            </ul>
+          </Col>
+          <Col xs={24} md={12}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: '#722ed1' }}>Метрики відстані (Результати):</div>
+            <ul style={{ paddingLeft: 20, margin: 0 }}>
+              <li style={{ marginBottom: 6 }}>
+                <b>d_E (Евклідова відстань)</b> — звичайна лінійна відстань між двома точками по прямій.
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>d_E² (Квадрат Евклідової відстані)</b> — відстань Евкліда без добування квадратного кореня. Надає прогресуючу вагу більшим відмінностям.
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>d_M (Манхеттенська відстань)</b> — відстань, що розраховується як сума абсолютних різниць координат (рух сіткою, як у таксі).
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>d_Ch (Відстань Чебишева)</b> — визначається за найбільшою різницею серед усіх координат.
+              </li>
+              <li style={{ marginBottom: 0 }}>
+                <b>d_P (Степенева відстань)</b> — узагальнена метрика, яка дозволяє налаштовувати чутливість шляхом регулювання ступенів <i>p</i> та <i>r</i>.
+              </li>
+            </ul>
+          </Col>
+        </Row>
+      )
+    }
+  ];
+
   return (
     <div>
       <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 16 }}>
@@ -144,12 +209,17 @@ export const Lab1 = () => {
         <Button 
           type="primary" 
           icon={<ExperimentOutlined />} 
-          href="/#/practical?tab=recommendations"
+          href="#/practical?tab=recommendations"
           style={{ background: 'linear-gradient(90deg, #1677ff, #722ed1)', border: 'none', borderRadius: 6 }}
         >
           Дивитись практичне застосування
         </Button>
       </div>
+
+      <Collapse 
+        items={theoryItems} 
+        style={{ marginBottom: 24, background: '#ffffff', borderRadius: 8, border: '1px solid #d9d9d9' }}
+      />
 
       <Row gutter={[24, 24]}>
         {/* Task 1 Panel */}

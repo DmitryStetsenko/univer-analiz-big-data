@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useStore } from '../store/useStore';
-import { Table, Card, Button, Slider, Typography, Row, Col, Divider, Space, Tag, InputNumber, Alert } from 'antd';
-import { PlayCircleOutlined, PauseCircleOutlined, LeftOutlined, RightOutlined, RedoOutlined, EditOutlined } from '@ant-design/icons';
+import { Table, Card, Button, Slider, Typography, Row, Col, Divider, Space, Tag, InputNumber, Alert, Collapse } from 'antd';
+import { PlayCircleOutlined, PauseCircleOutlined, LeftOutlined, RightOutlined, RedoOutlined, EditOutlined, InfoCircleOutlined, CalculatorOutlined } from '@ant-design/icons';
 import { Dendrogram } from './Dendrogram';
 
 const { Title, Text, Paragraph } = Typography;
@@ -150,8 +150,88 @@ export const ClusteringSimulation = ({ method = 'single' }) => {
   const stepMergeInfo = steps[currentStepIndex + 1]?.merged;
   const stepMergeDist = steps[currentStepIndex + 1]?.mergeDistance;
 
+  const theoryItems = [
+    {
+      key: 'overview',
+      label: <span style={{ fontWeight: 600 }}><InfoCircleOutlined style={{ color: '#1677ff', marginRight: 8 }} /> Що відбувається в процесі ієрархічної кластеризації?</span>,
+      children: (
+        <div>
+          <Paragraph>
+            <b>Ієрархічна агломеративна кластеризація</b> — це послідовне об'єднання окремих об'єктів у більші групи (кластери) на основі міри їхньої близькості (найменшої відстані).
+          </Paragraph>
+          <Paragraph>
+            Процес виконується покроково:
+          </Paragraph>
+          <ul style={{ paddingLeft: 20, marginBottom: 12 }}>
+            <li style={{ marginBottom: 6 }}>
+              <b>Крок 0 (Початковий стан):</b> Кожен окремий об'єкт розглядається як власний одноелементний кластер. Будується первинна матриця відстаней між усіма парами об'єктів.
+            </li>
+            <li style={{ marginBottom: 6 }}>
+              <b>Подальші кроки (Об'єднання):</b> На кожному етапі знаходяться два найближчі кластери та об'єднуються в один новий спільний кластер (вони підсвічені у матриці рожевим).
+            </li>
+            <li style={{ marginBottom: 6 }}>
+              <b>Перерахунок відстаней:</b> Відстані від нового об'єднаного кластера до решти наявних кластерів перераховуються відповідно до обраного методу зв'язку.
+            </li>
+            <li style={{ marginBottom: 0 }}>
+              <b>Результат (Дендрограма):</b> Об'єднання триває, доки всі об'єкти не стануть одним загальним кластером. Послідовність та відстані злиття відображаються у вигляді дерева — <b>дендрограми</b>.
+            </li>
+          </ul>
+          <Paragraph style={{ marginBottom: 0 }}>
+            Головна відмінність між методами: <b>метод найближчого сусіда</b> (одиночний зв'язок) шукає <i>мінімальну</i> відстань між точками двох кластерів, тоді як <b>метод найдальшого сусіда</b> (повний зв'язок) орієнтується на <i>максимальну</i> відстань між ними.
+          </Paragraph>
+        </div>
+      )
+    },
+    {
+      key: 'variables',
+      label: <span style={{ fontWeight: 600 }}><CalculatorOutlined style={{ color: '#722ed1', marginRight: 8 }} /> Пояснення змінних та позначень</span>,
+      children: (
+        <Row gutter={[16, 16]}>
+          <Col xs={24} md={12}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: '#1677ff' }}>Вхідні координати об'єктів:</div>
+            <ul style={{ paddingLeft: 20, margin: 0 }}>
+              <li style={{ marginBottom: 6 }}>
+                <b>Об'єкт (ID)</b> — підприємство, яке бере участь у групуванні.
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>x (Обсяг продукції)</b> — перша координата об'єкта, що відображає випуск продукції підприємства (млн грн).
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>y (Вартість фондів)</b> — друга координата об'єкта, що відображає середньорічну вартість основних фондів підприємства (млн грн).
+              </li>
+              <li style={{ marginBottom: 0 }}>
+                Координати можна редагувати у таблиці ліворуч, щоб спостерігати за автоматичною зміною структури кластерів та форми дендрограми.
+              </li>
+            </ul>
+          </Col>
+          <Col xs={24} md={12}>
+            <div style={{ fontWeight: 600, marginBottom: 8, color: '#722ed1' }}>Параметри алгоритму та метрики:</div>
+            <ul style={{ paddingLeft: 20, margin: 0 }}>
+              <li style={{ marginBottom: 6 }}>
+                <b>Матриця відстаней (Distance Matrix)</b> — таблиця попарних відстаней між усіма діючими кластерами на поточному кроці.
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>Крок (Step Index)</b> — номер ітерації. Для <i>N</i> об'єктів виконується рівно <i>N - 1</i> кроків злиття.
+              </li>
+              <li style={{ marginBottom: 6 }}>
+                <b>Коефіцієнт об'єднання (Merge Distance)</b> — відстань між парою найближчих кластерів у момент їх злиття. Відображає ступінь неоднорідності об'єднаного кластера.
+              </li>
+              <li style={{ marginBottom: 0 }}>
+                <b>Дендрограма (Dendrogram)</b> — ієрархічне дерево, де рівні злиття (висота горизонтальних ліній) відповідають коефіцієнтам об'єднання.
+              </li>
+            </ul>
+          </Col>
+        </Row>
+      )
+    }
+  ];
+
   return (
     <div>
+      <Collapse 
+        items={theoryItems} 
+        style={{ marginBottom: 24, background: '#ffffff', borderRadius: 8, border: '1px solid #d9d9d9' }}
+      />
       <Row gutter={[24, 24]}>
         {/* Left column: Coordinate Editor and Theory card */}
         <Col xs={24} lg={8}>

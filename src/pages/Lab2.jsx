@@ -18,7 +18,7 @@ export const Lab2 = () => {
         <Button 
           type="primary" 
           icon={<ExperimentOutlined />} 
-          href="/#/practical?tab=segmentation"
+          href="#/practical?tab=segmentation"
           style={{ background: 'linear-gradient(90deg, #1677ff, #722ed1)', border: 'none', borderRadius: 6 }}
         >
           Дивитись практичне застосування
